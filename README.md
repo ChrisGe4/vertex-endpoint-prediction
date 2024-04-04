@@ -1,7 +1,7 @@
 # Prediction With Custom Trained Model
 
 This application provides a frontend for getting predictions from a custom
-trained mode in Vertex AI.
+trained model in Vertex AI.
 
 ![LLM Text demo](images/fe.png)
 

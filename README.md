@@ -26,7 +26,7 @@ EMAIL=<YOUR_USER_ACCOUNT>
 REGION=<YOUR_GCP_REGION_NAME>
 ```
 
-3. Set up the cluster
+3. Set up the cluster(optional)
 
 ```shell
 gcloud container clusters create demo-gke-cluster --zone ${REGION} --num-nodes 1 --project ${PROJECT_ID}
@@ -34,7 +34,9 @@ gcloud container clusters create demo-gke-cluster --zone ${REGION} --num-nodes 1
 gcloud container clusters get-credentials demo-gke-cluster --zone ${REGION} --project ${PROJECT_ID}
 ```
 
-4. Enable Workload Identity Federation
+4. Enable Workload Identity Federation(optional).
+
+Note that, for GKE Autopilot clusters Workload Identity Federation is already enabled by default.
 
 ```shell
 
@@ -104,14 +106,14 @@ Build the docker image with Cloud Build and upload the image to Artifact
 Registry.
 
 ```shell
-AR_REPO=llm-test-ar
-SERVICE_NAME=imara-demo
+AR_REPO=test-llm-ar
+SERVICE_NAME=test-llm
 
 gcloud artifacts repositories create ${AR_REPO} --location=$REGION --repository-format=Docker
 
 gcloud auth configure-docker $REGION-docker.pkg.dev
 
-gcloud builds submit --tag $REGION-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/$SERVICE_NAME
+gcloud builds submit --tag $REGION-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/${SERVICE_NAME}
 ```
 
 ### Deploy
